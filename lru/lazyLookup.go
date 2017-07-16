@@ -23,14 +23,15 @@ func (l *LazyLookup) Add(k, v interface{}) bool {
 
 func (l *LazyLookup) Get(k interface{}) (interface{}, bool) {
 	stored, found := l.cache.Get(k)
-	if !found && l.lookupFn != nil {
-		val, ok := l.lookupFn(k)
-		if ok {
-			l.cache.Add(k, val)
-			return val, true
+	if !found {
+		if l.lookupFn != nil {
+			val, ok := l.lookupFn(k)
+			if ok {
+				l.cache.Add(k, val)
+				return val, true
+			}
 		}
 
-		// not in cache and not return from lookup;
 		return nil, false
 	}
 
