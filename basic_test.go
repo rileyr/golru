@@ -77,3 +77,34 @@ func TestRemove(t *testing.T) {
 		t.Fatal("expected that removing a key that doesn't exist would return false")
 	}
 }
+
+func TestRecent(t *testing.T) {
+	c := newBasic(3)
+	c.Add("a", 1)
+	c.Add("b", 2)
+	c.Add("c", 3)
+
+	// Assert that "a" is removed:
+	e := c.Add("d", 4)
+	if !e {
+		t.Fatal("expected eviction on 4th add")
+	}
+
+	_, ok := c.Get("a")
+	if ok {
+		t.Fatal("expected that the oldest item would be evicted")
+	}
+
+	// Access "b", then add, and assert that "b" was not removed,
+	// as it was no longer the oldest.
+	c.Get("b")
+	ev := c.Add("e", 5)
+	if !ev {
+		t.Fatal("expected eviction on 5th add")
+	}
+
+	_, ok = c.Get("b")
+	if !ok {
+		t.Fatalf("expected that accessing a key would reset it in the order")
+	}
+}
