@@ -15,3 +15,8 @@ type Cache interface {
 	// true if a key was deleted, and false if not.
 	Remove(interface{}) bool
 }
+
+// New returns a new threadsafe LRU.
+func New(size int) Cache {
+	return newMultiThreaded(size)
+}
