@@ -7,11 +7,11 @@ var _ Cache = &MultiThreaded{}
 // MultiThreaded is a mutex wrapper around the Basic
 // LRU implementation.
 type MultiThreaded struct {
-	cache *Basic
+	cache Cache
 	lock  *sync.RWMutex
 }
 
-func newMultiThreaded(size int) *MultiThreaded {
+func newMultiThreaded(size int) Cache {
 	return &MultiThreaded{
 		cache: newBasic(size),
 		lock:  &sync.RWMutex{},

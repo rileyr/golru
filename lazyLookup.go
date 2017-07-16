@@ -2,8 +2,8 @@ package golru
 
 var _ Cache = &LazyLookup{}
 
-// LazyLookup is a threadsafe cache that will
-// attempt to look and cache any Gets that miss.
+// LazyLookup is a cache that will
+// attempt to look up and cache any Gets that miss.
 type LazyLookup struct {
 	cache    Cache
 	lookupFn LookupFunc
@@ -13,8 +13,8 @@ type LazyLookup struct {
 // key. If the value cannot be obtained, false should be returned.
 type LookupFunc func(interface{}) (interface{}, bool)
 
-func newLazyLookup(size int, fn LookupFunc) *LazyLookup {
-	return &LazyLookup{cache: newMultiThreaded(size), lookupFn: fn}
+func newLazyLookup(c Cache, fn LookupFunc) Cache {
+	return &LazyLookup{cache: c, lookupFn: fn}
 }
 
 func (l *LazyLookup) Add(k, v interface{}) bool {

@@ -16,7 +16,18 @@ type Cache interface {
 	Remove(interface{}) bool
 }
 
-// New returns a new threadsafe LRU.
-func New(size int) Cache {
-	return newMultiThreaded(size)
+// New returns a new threadsafe LRU with provided options.
+func New(opts ...Option) Cache {
+	o := newDefaultOptions()
+
+	for _, opt := range opts {
+		opt(o)
+	}
+
+	c := newMultiThreaded(o.Size)
+	if o.Lookup != nil {
+		c = newLazyLookup(c, o.Lookup)
+	}
+
+	return c
 }

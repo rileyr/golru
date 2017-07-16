@@ -18,7 +18,7 @@ func TestLazyLookup(t *testing.T) {
 		return makeVal(s), true
 	}
 
-	c := newLazyLookup(3, lookup)
+	c := newLazyLookup(newBasic(3), lookup)
 	k := "key"
 	v := makeVal(k)
 

@@ -18,7 +18,7 @@ type item struct {
 	value interface{}
 }
 
-func newBasic(size int) *Basic {
+func newBasic(size int) Cache {
 	return &Basic{
 		list:  list.New(),
 		size:  size,
