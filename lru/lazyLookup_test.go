@@ -1,4 +1,4 @@
-package golru
+package lru
 
 import (
 	"fmt"

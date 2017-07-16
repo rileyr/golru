@@ -1,4 +1,4 @@
-package golru
+package lru
 
 // Cache is the interface that defines operations
 // that a cache can perform.

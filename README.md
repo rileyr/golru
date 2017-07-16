@@ -12,11 +12,11 @@ package main
 
 import(
   "fmt"
-  "github.com/rileyr/golru"
+  "github.com/rileyr/golru/lru"
 )
 
 func main() {
-  cache := golru.New(golru.WithSize(30))
+  cache := lru.New(lru.WithSize(30))
 
   cache.Add("key", "value")
   val, ok := cache.Get("key")
@@ -36,7 +36,7 @@ package main
 
 import(
   "fmt"
-  "github.com/rileyr/golru"
+  "github.com/rileyr/golru/lru"
 )
 
 func lookup(k interface{}) (interface{}, bool) {
@@ -49,7 +49,7 @@ func lookup(k interface{}) (interface{}, bool) {
 }
 
 func main() {
-  cache := golru.New(golru.WithSize(30), golru.WithLookup(lookup))
+  cache := lru.New(lru.WithSize(30), lru.WithLookup(lookup))
   val, _ := cache.Get(22)
   str := val.(string)
   fmt.Printf("got from cache: %s\n", str)

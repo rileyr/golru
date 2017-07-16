@@ -1,4 +1,4 @@
-package golru
+package lru
 
 type Options struct {
 	Size   int
