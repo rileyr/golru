@@ -55,3 +55,12 @@ func main() {
   fmt.Printf("got from cache: %s\n", str)
 }
 ```
+
+### Standalone HTTP LRU
+
+This repo provides a standalone HTTP server that serves the cache as json. To use:
+
+```shell
+$> go install github.com/rileyr/golru/weblru
+$> weblru -port=:3015 -username=basicauthusername -password=basicauthpassword -size=100
+```
