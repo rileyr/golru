@@ -75,7 +75,7 @@ func (h *Handler) Remove(w http.ResponseWriter, r *http.Request, p httprouter.Pa
 }
 
 func (h *Handler) handleError(w http.ResponseWriter, r *http.Request, p httprouter.Params, e error) {
-	rid := r.Context().Value(wares.RequestIDContextKey).(string)
+	rid := r.Context().Value(wares.RequestIDContextKey{}).(string)
 	log.Printf("ERROR: %s -- %s -- %s -- %s", rid, r.Method, r.URL.Path, e.Error())
 	w.WriteHeader(http.StatusInternalServerError)
 	return
