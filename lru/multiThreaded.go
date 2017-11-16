@@ -11,9 +11,9 @@ type MultiThreaded struct {
 	lock  *sync.RWMutex
 }
 
-func newMultiThreaded(size int) Cache {
+func newMultiThreaded(c Cache) Cache {
 	return &MultiThreaded{
-		cache: newBasic(size),
+		cache: c,
 		lock:  &sync.RWMutex{},
 	}
 }

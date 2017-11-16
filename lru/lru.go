@@ -16,7 +16,7 @@ type Cache interface {
 	Remove(interface{}) bool
 }
 
-// New returns a new threadsafe LRU with provided options.
+// New returns a new LRU with provided options.
 func New(opts ...Option) Cache {
 	o := newDefaultOptions()
 
@@ -24,7 +24,12 @@ func New(opts ...Option) Cache {
 		opt(o)
 	}
 
-	c := newMultiThreaded(o.Size)
+	c := newBasic(o.Size)
+
+	if o.MultiThreaded {
+		c = newMultiThreaded(c)
+	}
+
 	if o.Lookup != nil {
 		c = newLazyLookup(c, o.Lookup)
 	}

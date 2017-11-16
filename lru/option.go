@@ -1,8 +1,9 @@
 package lru
 
 type Options struct {
-	Size   int
-	Lookup LookupFunc
+	Size          int
+	Lookup        LookupFunc
+	MultiThreaded bool
 }
 
 type Option func(*Options)
@@ -21,6 +22,10 @@ func WithSize(s int) Option {
 	return func(o *Options) {
 		o.Size = s
 	}
+}
+
+func WithMultiThreaded(o *Options) {
+	o.MultiThreaded = true
 }
 
 func newDefaultOptions() *Options {

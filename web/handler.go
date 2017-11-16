@@ -15,7 +15,7 @@ type Handler struct {
 }
 
 func New(s int) *Handler {
-	return &Handler{cache: lru.New(lru.WithSize(s))}
+	return &Handler{cache: lru.New(lru.WithSize(s), lru.WithMultiThreaded)}
 }
 
 func (h *Handler) Get(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
