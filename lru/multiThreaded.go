@@ -35,3 +35,9 @@ func (m *MultiThreaded) Remove(k interface{}) bool {
 	defer m.lock.Unlock()
 	return m.cache.Remove(k)
 }
+
+func (m *MultiThreaded) Clear() {
+	m.lock.Lock()
+	defer m.lock.Unlock()
+	m.cache.Clear()
+}

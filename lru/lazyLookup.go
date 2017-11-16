@@ -38,6 +38,10 @@ func (l *LazyLookup) Get(k interface{}) (interface{}, bool) {
 	return stored, true
 }
 
+func (l *LazyLookup) Clear() {
+	l.cache.Clear()
+}
+
 func (l *LazyLookup) Remove(k interface{}) bool {
 	return l.cache.Remove(k)
 }

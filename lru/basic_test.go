@@ -108,3 +108,17 @@ func TestRecent(t *testing.T) {
 		t.Fatalf("expected that accessing a key would reset it in the order")
 	}
 }
+
+func TestClear(t *testing.T) {
+	c := newBasic(3)
+	c.Add("a", "a")
+	c.Add("b", true)
+
+	c.Clear()
+	if _, ok := c.Get("a"); ok {
+		t.Error("expected that clear would remove all keys")
+	}
+	if _, ok := c.Get("b"); ok {
+		t.Error("expected that clear would remove all keys")
+	}
+}

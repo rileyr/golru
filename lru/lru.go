@@ -14,6 +14,9 @@ type Cache interface {
 	// Remove deletes a key from the cache. The returned boolean is
 	// true if a key was deleted, and false if not.
 	Remove(interface{}) bool
+
+	// Clear should clear the cache.
+	Clear()
 }
 
 // New returns a new LRU with provided options.

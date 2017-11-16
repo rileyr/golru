@@ -69,6 +69,12 @@ func (b *Basic) Remove(k interface{}) (ok bool) {
 	return ok
 }
 
+func (b *Basic) Clear() {
+	for _, v := range b.store {
+		b.remove(v)
+	}
+}
+
 func (b *Basic) evictOne() {
 	if len(b.store) == 0 {
 		return
