@@ -8,13 +8,13 @@ var _ Cache = &MultiThreaded{}
 // LRU implementation.
 type MultiThreaded struct {
 	cache Cache
-	lock  *sync.RWMutex
+	lock  *sync.Mutex
 }
 
 func newMultiThreaded(c Cache) Cache {
 	return &MultiThreaded{
 		cache: c,
-		lock:  &sync.RWMutex{},
+		lock:  &sync.Mutex{},
 	}
 }
 
