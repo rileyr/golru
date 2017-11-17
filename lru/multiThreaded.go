@@ -25,8 +25,8 @@ func (m *MultiThreaded) Add(k, v interface{}) bool {
 }
 
 func (m *MultiThreaded) Get(k interface{}) (interface{}, bool) {
-	m.lock.RLock()
-	defer m.lock.RUnlock()
+	m.lock.Lock()
+	defer m.lock.Unlock()
 	return m.cache.Get(k)
 }
 
