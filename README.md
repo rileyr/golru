@@ -92,6 +92,7 @@ GET localhost:3015/cache?key=foo:
 }
 #=> 200 FOUND
 #=> 400 UNPROCESSABLE ENTITY
+#=> 404 NOT FOUND
 #=> 500 INTERNAL SERVER ERROR
 
 DELETE localhost:3015/cache:
